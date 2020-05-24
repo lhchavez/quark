@@ -61,8 +61,8 @@ jobs:
 
       - name: Package
         run: |
-          tar -cJf omegaup-backend.tar.xz --owner=root:0 --group=root:0 -C backend/
-          tar -cJf omegaup-runner.tar.xz --owner=root:0 --group=root:0 -C runner/
+          tar -cJf omegaup-backend.tar.xz --owner=root:0 --group=root:0 -C backend/ .
+          tar -cJf omegaup-runner.tar.xz --owner=root:0 --group=root:0 -C runner/ .
 
       - name: Create Release
         id: create-release
