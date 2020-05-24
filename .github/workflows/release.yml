@@ -43,26 +43,26 @@ jobs:
 
       - name: Build
         run: |
-          mkdir -p backend/usr/bin/
-          go build -o backend/usr/bin/omegaup-grader \
+          mkdir -p artifacts/backend/usr/bin/
+          go build -o artifacts/backend/usr/bin/omegaup-grader \
             -ldflags "-X main.ProgramVersion=${{ steps.bump-version.outputs.tag }}" \
             -tags=static \
             github.com/omegaup/quark/cmd/omegaup-grader
-          go build -o backend/usr/bin/omegaup-broadcaster \
+          go build -o artifacts/backend/usr/bin/omegaup-broadcaster \
             -ldflags "-X main.ProgramVersion=${{ steps.bump-version.outputs.tag }}" \
             -tags=static \
             github.com/omegaup/quark/cmd/omegaup-broadcaster
 
-          mkdir -p runner/usr/bin/
-          go build -o runner/bin/omegaup-runner \
+          mkdir -p artifacts/runner/usr/bin/
+          go build -o artifacts/runner/usr/bin/omegaup-runner \
             -ldflags "-X main.ProgramVersion=${{ steps.bump-version.outputs.tag }}" \
             -tags=static \
             github.com/omegaup/quark/cmd/omegaup-runner
 
       - name: Package
         run: |
-          tar -cJf omegaup-backend.tar.xz --owner=root:0 --group=root:0 -C backend/ .
-          tar -cJf omegaup-runner.tar.xz --owner=root:0 --group=root:0 -C runner/ .
+          tar -cJf omegaup-backend.tar.xz --owner=root:0 --group=root:0 -C artifacts/backend/ .
+          tar -cJf omegaup-runner.tar.xz --owner=root:0 --group=root:0 -C artifacts/runner/ .
 
       - name: Create Release
         id: create-release
